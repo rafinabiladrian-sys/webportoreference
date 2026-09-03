@@ -14,8 +14,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Risal Amin | Full Stack Developer',
-    template: '%s | Risal Amin'
+    default: 'Rafi Nabil Adrian | Backend Developer',
+    template: '%s | Rafi Nabil Adrian'
   },
   description:
     'An online portfolio and blog by Risal Amin. Showcase some of my past projects and some of my thoughts on the world of web development.',
