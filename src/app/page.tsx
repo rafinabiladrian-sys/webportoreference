@@ -14,9 +14,9 @@ import { FaFileLines, FaLinkedin } from 'react-icons/fa6';
 import { SiGithub } from 'react-icons/si';
 
 const { title: _, ...homeMetadata } = generatePageMetadata({
-  title: 'Risal Amin',
+  title: 'Rafi Nabil Adrian',
   description:
-    'An online portfolio and blog by Risal Amin. Showcase some of my past projects and some of my thoughts on the world of web development.',
+    'An online portfolio and blog by Rafi Nabil Adrian. Showcase some of my past projects and some of my thoughts on the world of web development.',
   pathname: '/'
 });
 
@@ -35,8 +35,7 @@ export default async function Home(): Promise<React.JSX.Element> {
     featuredBlog = await getAllContents('blog');
     featuredProjects = await getAllContents('projects');
 
-    initialSpotifyData = await getCurrentlyPlayingByType('spotify');
-    initialNavidromeData = await getCurrentlyPlayingByType('navidrome');
+    
   } catch (error) {
     console.error('home ssr error', error);
   }
@@ -166,7 +165,7 @@ const socialLink: SocialLink[] = [
   },
   {
     name: 'LinkedIn',
-    href: 'https://linkedin.com/in/risalamin',
+    href: '',
     Icon: FaLinkedin
   },
   {
