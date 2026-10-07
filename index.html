@@ -1,1 +1,169 @@
-nano index.html
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rafi Nabil Adrian — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --accent-start: oklch(0.627 0.265 303.9);
+    --accent-end:   oklch(0.718 0.202 349.761);
+    --bg:           oklch(1 0 0);
+    --fg:           oklch(0 0 0);
+    --primary:      oklch(0.208 0.042 265.755);
+    --secondary:    oklch(0.279 0.041 260.031);
+    --muted:        oklch(0.446 0.043 257.281);
+    --muted-bg:     oklch(0.929 0.006 286.286);
+    --border:       oklch(0.869 0.008 286.286);
+    --card-bg:      oklch(0.97 0.004 286.286);
+    --enter-dur: 360ms; --enter-dist: 40px;
+  }
+  .dark {
+    --bg: oklch(0.08 0 0); --fg: oklch(1 0 0);
+    --primary: oklch(0.968 0.007 247.896); --secondary: oklch(0.929 0.013 255.508);
+    --muted: oklch(0.704 0.04 256.788); --muted-bg: oklch(0.274 0.006 286.033);
+    --border: oklch(0.371 0.008 286.033); --card-bg: oklch(0.13 0.006 286.033);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--fg); transition: background .3s, color .3s; min-height: 100vh; }
+  .layout { max-width: 700px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+  .accent { background: linear-gradient(90deg, var(--accent-start), var(--accent-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; border-bottom: 1px solid var(--border); margin-bottom: 3.5rem; }
+  .nav-logo { font-weight: 700; font-size: 1.1rem; color: var(--fg); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--fg); }
+  .theme-btn { background: none; border: 1px solid var(--border); border-radius: 8px; padding: .35rem .6rem; cursor: pointer; color: var(--muted); font-size: 1rem; transition: color .2s, border-color .2s; line-height: 1; }
+  .theme-btn:hover { color: var(--fg); border-color: var(--muted); }
+  @keyframes enterFade { from { opacity: 0; filter: blur(3px); } to { opacity: 1; filter: blur(0); } }
+  @keyframes enterSlideY { from { transform: translateY(var(--enter-dist)); } to { transform: translateY(0); } }
+  .enter { animation: enterFade var(--enter-dur) ease-out both, enterSlideY var(--enter-dur) ease-out both; }
+  .d100{animation-delay:100ms}.d200{animation-delay:200ms}.d300{animation-delay:300ms}.d400{animation-delay:400ms}.d500{animation-delay:500ms}.d600{animation-delay:600ms}.d700{animation-delay:700ms}
+  @media (prefers-reduced-motion: reduce) { .enter { animation-duration: 0s !important; animation-delay: 0s !important; } }
+  .hero { margin-bottom: 4rem; }
+  .hero-greeting { font-size: .9rem; color: var(--muted); font-weight: 500; margin-bottom: .75rem; letter-spacing: .05em; text-transform: uppercase; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.15; margin-bottom: .5rem; color: var(--primary); }
+  .hero-role { font-size: 1.1rem; font-weight: 600; color: var(--secondary); margin-bottom: 1.25rem; }
+  .hero-bio { font-size: 1rem; color: var(--muted); line-height: 1.7; max-width: 560px; margin-bottom: 2rem; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-bottom: 1.75rem; }
+  .btn-primary { display: inline-flex; align-items: center; gap: .45rem; padding: .55rem 1.1rem; border-radius: 9px; font-size: .875rem; font-weight: 600; text-decoration: none; background: linear-gradient(135deg, var(--accent-start), var(--accent-end)); color: #fff; transition: opacity .2s, transform .15s; box-shadow: 0 2px 12px rgba(192,100,255,.25); }
+  .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+  .btn-secondary { display: inline-flex; align-items: center; gap: .45rem; padding: .55rem 1.1rem; border-radius: 9px; font-size: .875rem; font-weight: 600; text-decoration: none; border: 1px solid var(--border); color: var(--secondary); background: transparent; transition: border-color .2s, color .2s, transform .15s; }
+  .btn-secondary:hover { border-color: var(--muted); color: var(--primary); transform: translateY(-1px); }
+  .socials { display: flex; gap: .75rem; flex-wrap: wrap; }
+  .social-link { display: inline-flex; align-items: center; gap: .4rem; font-size: .8rem; font-weight: 500; color: var(--muted); text-decoration: none; border: 1px solid var(--border); padding: .35rem .75rem; border-radius: 7px; transition: color .2s, border-color .2s, background .2s; }
+  .social-link:hover { color: var(--fg); border-color: var(--muted); background: var(--muted-bg); }
+  .social-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .section { margin-bottom: 3.5rem; }
+  .section-header { margin-bottom: 1.5rem; }
+  .section-header h2 { font-size: 1.4rem; font-weight: 700; letter-spacing: -.025em; color: var(--primary); margin-bottom: .3rem; }
+  .section-header p { font-size: .875rem; color: var(--muted); }
+  .blog-grid { display: flex; flex-direction: column; gap: 1rem; }
+  .blog-card { display: flex; flex-direction: column; gap: .4rem; padding: 1.1rem 1.25rem; border: 1px solid var(--border); border-radius: 12px; background: var(--card-bg); text-decoration: none; transition: border-color .2s, transform .2s, box-shadow .2s; }
+  .blog-card:hover { border-color: var(--muted); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,.06); }
+  .dark .blog-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.25); }
+  .blog-card-meta { display: flex; align-items: center; gap: .6rem; font-size: .75rem; color: var(--muted); }
+  .blog-tag { padding: .15rem .5rem; border-radius: 5px; background: var(--muted-bg); font-size: .7rem; font-weight: 500; color: var(--muted); }
+  .blog-card h3 { font-size: 1rem; font-weight: 600; color: var(--primary); letter-spacing: -.015em; line-height: 1.4; }
+  .blog-card p { font-size: .875rem; color: var(--muted); line-height: 1.6; }
+  .blog-card-footer { display: flex; align-items: center; gap: 1rem; font-size: .75rem; color: var(--muted); margin-top: .2rem; }
+  .blog-card-footer span { display: flex; align-items: center; gap: .3rem; }
+  .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+  .project-card { display: flex; flex-direction: column; gap: .6rem; padding: 1.25rem; border: 1px solid var(--border); border-radius: 12px; background: var(--card-bg); text-decoration: none; transition: border-color .2s, transform .2s, box-shadow .2s; }
+  .project-card:hover { border-color: var(--muted); transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,.07); }
+  .dark .project-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.3); }
+  .project-icon { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, var(--accent-start), var(--accent-end)); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .project-card h3 { font-size: 1rem; font-weight: 600; color: var(--primary); letter-spacing: -.015em; }
+  .project-card p { font-size: .85rem; color: var(--muted); line-height: 1.6; flex: 1; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .2rem; }
+  .tech-badge { font-size: .68rem; font-weight: 500; padding: .15rem .5rem; border-radius: 5px; background: var(--muted-bg); color: var(--muted); }
+  .see-more { display: inline-flex; align-items: center; gap: .3rem; margin-top: 1rem; font-size: .875rem; font-weight: 500; color: var(--muted); text-decoration: none; transition: color .2s; }
+  .see-more:hover { color: var(--fg); }
+  .see-more svg { width: 14px; height: 14px; }
+  .playing-card { display: flex; align-items: center; gap: 1rem; padding: .9rem 1.1rem; border: 1px solid var(--border); border-radius: 12px; background: var(--card-bg); }
+  .playing-album { width: 44px; height: 44px; border-radius: 8px; background: linear-gradient(135deg, var(--accent-start), var(--accent-end)); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; animation: spin 4s linear infinite paused; }
+  .playing-card.active .playing-album { animation-play-state: running; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .playing-info { flex: 1; min-width: 0; }
+  .playing-label { font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: .2rem; }
+  .playing-title { font-size: .9rem; font-weight: 600; color: var(--primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .playing-artist { font-size: .78rem; color: var(--muted); }
+  .playing-bars { display: flex; align-items: flex-end; gap: 2px; height: 20px; }
+  .bar { width: 3px; background: linear-gradient(180deg, var(--accent-start), var(--accent-end)); border-radius: 2px; animation: barBounce .8s ease-in-out infinite alternate; }
+  .bar:nth-child(2){animation-delay:.15s}.bar:nth-child(3){animation-delay:.3s}.bar:nth-child(4){animation-delay:.1s}
+  @keyframes barBounce { from { height: 4px; } to { height: 18px; } }
+  .divider { height: 1px; background: var(--border); margin: 3rem 0; }
+  @media (max-width: 480px) { .project-grid { grid-template-columns: 1fr; } .nav-links { display: none; } }
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="enter">
+    <a href="#" class="nav-logo">RNA.</a>
+    <ul class="nav-links">
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  </nav>
+  <section class="hero">
+    <p class="hero-greeting enter d100">Hey there 👋</p>
+    <h1 class="enter d200">Hi, I'm <span class="accent">Rafi Nabil</span><br/><span class="accent">Adrian</span></h1>
+    <p class="hero-role enter d300">UX / Product Designer</p>
+    <p class="hero-bio enter d400">A designer who loves crafting intuitive, beautiful digital experiences — bridging the gap between product thinking and visual craft. Currently exploring the intersection of design systems, motion, and developer tooling.</p>
+    <div class="hero-actions enter d500">
+      <a href="#projects" class="btn-primary"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M1 12.5 6 7l3 3 5-6"/></svg>See my work</a>
+      <a href="#blog" class="btn-secondary"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M2 4h12M2 8h8M2 12h5"/></svg>Read blog</a>
+    </div>
+    <div class="socials enter d600">
+      <a href="https://github.com/rafinabiladrian-sys" class="social-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>GitHub</a>
+      <a href="#" class="social-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+      <a href="#" class="social-link"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>Resume</a>
+    </div>
+  </section>
+  <div class="enter d700" style="margin-bottom:3.5rem">
+    <div class="playing-card active">
+      <div class="playing-album">🎵</div>
+      <div class="playing-info">
+        <div class="playing-label">Now Playing — Spotify</div>
+        <div class="playing-title">Blinding Lights</div>
+        <div class="playing-artist">The Weeknd</div>
+      </div>
+      <div class="playing-bars"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+    </div>
+  </div>
+  <section class="section" id="blog">
+    <div class="section-header enter"><h2>Featured <span class="accent">Posts</span></h2><p>Check out my featured blog posts.</p></div>
+    <div class="blog-grid">
+      <a class="blog-card enter d100" href="#"><div class="blog-card-meta"><span class="blog-tag">Design Systems</span><span>·</span><span>Aug 2026</span></div><h3>Building a Token-Based Design System from Scratch</h3><p>How I structured design tokens, created component documentation, and shipped a system that both designers and developers actually love using.</p><div class="blog-card-footer"><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2 2"/></svg>6 min read</span><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5Z"/><circle cx="8" cy="8" r="2"/></svg>1.2k views</span></div></a>
+      <a class="blog-card enter d200" href="#"><div class="blog-card-meta"><span class="blog-tag">UX Research</span><span>·</span><span>Jul 2026</span></div><h3>Why Usability Testing Early Saves You 10× Later</h3><p>Lessons from running guerrilla testing sessions on a product team that had never done user research — and what changed once they started.</p><div class="blog-card-footer"><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2 2"/></svg>8 min read</span><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5Z"/><circle cx="8" cy="8" r="2"/></svg>940 views</span></div></a>
+      <a class="blog-card enter d300" href="#"><div class="blog-card-meta"><span class="blog-tag">Motion Design</span><span>·</span><span>Jun 2026</span></div><h3>Micro-interactions That Feel Right (Not Just Look Right)</h3><p>The difference between animations that wow and animations that help — a deep dive into timing, easing, and intentional motion.</p><div class="blog-card-footer"><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2 2"/></svg>5 min read</span><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5Z"/><circle cx="8" cy="8" r="2"/></svg>780 views</span></div></a>
+    </div>
+    <a href="#" class="see-more enter d400">See all posts <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </section>
+  <div class="divider"></div>
+  <section class="section" id="projects">
+    <div class="section-header enter"><h2>Featured <span class="accent">Projects</span></h2><p>Check out my featured projects.</p></div>
+    <div class="project-grid">
+      <a class="project-card enter d100" href="#"><div class="project-icon">🎨</div><h3>Figma Design Tokens Plugin</h3><p>A Figma plugin that exports design tokens in multiple formats — CSS vars, JSON, Tailwind config — with live preview.</p><div class="project-tech"><span class="tech-badge">Figma API</span><span class="tech-badge">TypeScript</span><span class="tech-badge">React</span></div></a>
+      <a class="project-card enter d200" href="#"><div class="project-icon">🧩</div><h3>Kona UI — Component Library</h3><p>Accessible, themeable React component library built on Radix primitives and Tailwind CSS with full Storybook docs.</p><div class="project-tech"><span class="tech-badge">React</span><span class="tech-badge">Radix UI</span><span class="tech-badge">Storybook</span></div></a>
+      <a class="project-card enter d300" href="#"><div class="project-icon">📊</div><h3>Product Analytics Dashboard</h3><p>Real-time dashboard for tracking user retention, funnel drop-offs, and feature adoption — built for a SaaS product team.</p><div class="project-tech"><span class="tech-badge">Next.js</span><span class="tech-badge">Recharts</span><span class="tech-badge">Supabase</span></div></a>
+      <a class="project-card enter d400" href="#"><div class="project-icon">✍️</div><h3>Personal Portfolio v2</h3><p>This very site — MDX-powered blog, dark/light mode, staggered animations, and a guestbook backed by GitHub OAuth.</p><div class="project-tech"><span class="tech-badge">Next.js</span><span class="tech-badge">Tailwind CSS</span><span class="tech-badge">MDX</span></div></a>
+    </div>
+    <a href="#" class="see-more enter d500">See all projects <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </section>
+</div>
+<script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    const isDark = html.classList.toggle('dark');
+    btn.textContent = isDark ? '🌙' : '☀️';
+  }
+  document.getElementById('themeBtn').textContent = document.documentElement.classList.contains('dark') ? '🌙' : '☀️';
+</script>
+</body>
+</html>
